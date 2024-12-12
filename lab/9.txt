@@ -1,0 +1,63 @@
+//Gamemanager
+
+using UnityEngine;
+using TMPro;
+using UnityEngine.SceneManagement;
+public class Gamemanager : MonoBehaviour
+{
+int score=0;
+public TextMeshProUGUI txt;
+void Start()
+{
+    // LoadData();
+    txt.text = score.ToString();
+}
+void LoadData()
+{
+    score=PlayerPrefs.GetInt("score",0);
+    Debug.Log($"Score is {score}");
+}
+void SaveData()
+{
+    PlayerPrefs.SetInt("score",score);
+    PlayerPrefs.Save();
+    Debug.Log("Game data saved.");
+
+}
+public void AddCoin(int val)
+{
+score=score+val;
+Debug.Log(score);
+txt.text = score.ToString();
+SaveData();
+}
+public void Restart()
+{
+SceneManager.LoadScene(1);
+}
+public void Quit()
+{
+Application.Quit();
+}
+
+}
+
+//distroy
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class distroy : MonoBehaviour
+{
+    // Start is called before the first frame update
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.tag=="Player")
+        {
+            SceneManager.LoadScene(0);   
+        }
+    }
+    
+}

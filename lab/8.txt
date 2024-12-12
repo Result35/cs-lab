@@ -1,0 +1,29 @@
+using UnityEngine;
+using System.IO;
+public class Gamemanager : MonoBehaviour
+{
+int score=0;
+void Start()
+{
+     LoadData();
+    
+}
+void LoadData()
+{
+    score=PlayerPrefs.GetInt("score",0);
+    Debug.Log($"Score is {score}");
+}
+void SaveData()
+{
+    PlayerPrefs.SetInt("score",score);
+    PlayerPrefs.Save();
+    Debug.Log("Game data saved.");
+
+}
+public void AddCoin(int val)
+{
+score=score+val;
+Debug.Log(score);
+SaveData();
+}
+}
